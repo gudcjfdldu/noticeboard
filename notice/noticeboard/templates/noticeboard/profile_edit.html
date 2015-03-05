@@ -1,0 +1,114 @@
+{% extends "noticeboard/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css"
+      href="{% static 'noticeboard/css/profile_edit.css' %}">
+<script data-main="{% static 'noticeboard/js/profile.js' %}" 
+          src="{% static 'noticeboard/libs/require.js' %}">
+</script>
+{% endblock %}
+{% block mainbar %}
+<div class="subheader">
+  <div class="subheader-links">
+    <a class="profile-link" href="{% url 'profile.edit' profile.id %}">edit</a>
+    <a class="profile-link" href="{% url 'profile.delete' profile.id %}">delete</a>
+  </div>
+</div>
+<form class="user-edit-form" method="post" enctype="multipart/form-data"
+      action="{% url 'profile.edit' profile.id %}">
+  {% csrf_token %}
+  <div class="profile-title">
+    <h2> Registered User </h2>
+  </div>
+  {% if profile.profile_image %}
+  <div class="profile-img-wrapper">
+    <img src="{{ profile.profile_image.url }}" class="profile-image"/>
+    <div class="change-profile-img">
+      <a href="javascript:void(0);" onclick="uploadImage(this)">
+        change picture
+      </a>
+      <input type="file" name="file" class="profile-file"/> 
+    </div>
+  </div>
+  {% else %}
+  <div class="profile-img-wrapper">
+    <img class="profile-image" src="{% static 'noticeboard/images/question.jpg' %}"/>
+    <div class="change-profile-img">
+      <a href="javascript:void(0);" onclick="uploadImage(this)">
+        change picture
+      </a>
+      <input type="file" name="file" class="profile-file"/>
+    </div>
+  </div>
+  {% endif %}
+  <div class="profile-editform-wrapper">
+    <div class="editform-inner">
+      <div class="content-description">
+        Display Name
+      </div>
+      <input type="text" class="user-editform" 
+      value="{{ profile.user.username }}" name="username"/>
+    </div>
+    <div class="editform-inner">
+      <div class="content-description">
+        Email
+      </div>
+      <input type="text" class="user-editform"
+      value="{{ profile.email }}" name="email"/>
+    </div>
+    <div class="editform-inner">
+      <div class="content-description">
+        Real Name
+      </div>
+      {% if profile.real_name|stringformat:"s" == '' %}
+      <input type="text" class="user-editform"
+      value="{{ profile.user.username }}" name="realname"/>
+      {% else %}
+      <input type="text" class="user-editform"
+      value="{{ profile.real_name }}" name="realname"/>
+      {% endif %}
+    </div>
+    <div class="editform-inner">
+      <div class="content-description">
+        Web Site
+      </div>
+      <input type="text" class="user-editform"
+      value="{{ profile.website }}" name="website"/>
+    </div>
+    <div class="editform-inner">
+      <div class="content-description">
+        Location
+      </div> 
+      <input type="text" class="user-editform"
+      value="{{ profile.location }}" name="location"/>
+    </div>
+    <div class="editform-inner">
+      <div class="content-description">
+        Age
+      </div>
+      {% if profile.age|add:0 == 0 %}
+      <input type="text" class="user-editform"
+      name="age"/>
+      {% else %}
+      <input type="text" class="user-editform"
+      value="{{ profile.age }}" name="age"/>
+      {% endif %}
+    </div>
+    <div class="aboutme-inner">
+      <div class="content-description">
+        AboutMe
+      </div>
+      <textarea id="aboutme-input" name="aboutme">{{ profile.about_me }}</textarea>
+    </div>
+  </div>
+  <div class="form-submit">
+    <input id="submit-button" type="submit" value="Save Profile"/>
+    <a id="cancel" href="{% url 'profile.detail' profile.id %}">cancel</a>
+  </div>
+  
+</form>
+{% endblock %}
+
+

@@ -1,0 +1,78 @@
+.subheader{
+    height: 34px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#tabs a{
+    text-decoration: none;
+    background: #fff;
+    color: #777;
+    font-size: 12px;
+    padding: 10px;
+    margin-right: 8px;
+}
+
+#login{
+    background: #f9f9f9;
+    width: 258px;
+    border: 1px solid #d4d4d4;
+    color: #888;
+    margin-bottom: 15px;
+    cursor: pointer;
+    padding: 7px;
+}
+
+#user-name{
+    width: 250px;
+    border: 1px solid #999;
+    padding: 3px;
+    font-size: 100%;
+    margin: 5px 0 5px 0;
+}
+
+#user-email{
+    width: 250px;
+    border: 1px solid #999;
+    padding: 3px;
+    font-size: 100%;
+    margin: 5px 0 5px 0;
+
+}
+
+#user-password{
+    width: 250px;
+    border: 1px solid #999;
+    padding: 3px;
+    font-size: 100%;
+    margin: 5px 0 5px 0;
+}
+
+#confirm-password{
+    width: 250px;
+    border: 1px solid #999;
+    padding: 3px;
+    font-size: 100%;
+    margin: 5px 0 5px 0;
+}
+
+#submit-button{
+    background-color: #009afd;
+    border: 1px solid #1777b7;
+    padding: 8px 10px 7px 10px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.title{
+    padding: 20px 0;
+}
+
+.form-submit{
+    padding: 10px 0 15px 0;
+}
+
+.login-user{
+    height: 34px;
+    padding-left: 10px;
+    color: #0c65ac;
+}

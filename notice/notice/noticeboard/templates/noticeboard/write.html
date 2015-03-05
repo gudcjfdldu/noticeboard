@@ -1,0 +1,49 @@
+{% extends "noticeboard/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'noticeboard/css/write.css' %}"/>
+{% endblock %}
+
+  {% block mainbar %}
+    {% if post %}
+    <form action="{% url 'post.edit' post.id %}" method="post">
+      {% csrf_token %}
+      <div id="post-write-form">
+        <div id="post-title">
+          <label for="title">Title </label>
+          <input id="post-input-title" type="text" name="title" value="{{ post.title }} ">
+        </div>
+        <div id="post-editor">
+          <div class="post-content-container">
+            <textarea id="content-input" name="content">{{ post.text }}</textarea>
+          </div>
+        </div>
+        <div id="form-submit">
+          <input id="submit-button" type="submit" value="Post your board">
+        </div>
+      </div>
+    </form>
+    {% else %}
+    <form action="{% url 'post.index_or_create' %}" method="post">
+      {% csrf_token %}
+      <div id="post-write-form">
+        <div id="post-title">
+          <label for="title">Title </label>
+          <input id="post-input-title" type="text" name="title" value="">
+        </div>
+        <div id="post-editor">
+          <div class="post-content-container">
+            <textarea id="content-input" name="content"></textarea>
+          </div>
+        </div>
+        <div id="form-submit">
+          <input id="submit-button" type="submit" value="Post your board">
+        </div>
+      </div>
+    </form>
+    {% endif %}
+  {% endblock %}
+

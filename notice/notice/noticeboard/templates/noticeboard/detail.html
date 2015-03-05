@@ -1,0 +1,126 @@
+{% extends "noticeboard/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'noticeboard/css/detail.css' %}" /> 
+  <script data-main="{% static 'noticeboard/js/detail' %}" 
+          src="{% static 'noticeboard/libs/require.js' %}">
+  </script>
+{% endblock %}
+{% block mainbar %}
+<div id="nb-top-bar">
+  <div class="nb-title-date-wrap">
+    <div id="nb-date">
+      {{ post.pub_date }}
+    </div>
+    <h3 class="nb-title">
+      {{ post.title }}
+    </h3>
+  </div>
+  <div id="nb-writer-info-wrap">
+    <div id="nb-board-info">
+      <div id="nb-board-hit">
+        {{ post.hit }}
+      </div>
+      <div id="nb-board-comment">
+        {{ post.comment_set.count }} comments
+      </div>
+    </div>
+    <div id="nb-writer">
+      {{ post.writer.username }}
+    </div>
+  </div>
+</div>
+{% if owner %}
+<div id="nb-background-of-delmod">
+  <div id="nb-delete-modify-box">
+    <form class="nb-delmod-form nb-delete-form"
+      action="{% url 'post.delete' post.id %}" method="post">
+      {% csrf_token %}
+      <button class="submit-button" type="submit">delete</button>
+    </form>
+    <form class="nb-delmod-form nb-modify-form"
+      action="{% url 'post.edit' post.id %}" method="get">
+      {% csrf_token %}
+      <button class="submit-button" type="submit">modify</button>
+    </form>
+  </div>
+</div>
+{% endif %}
+<div class="nb-post-content-container">
+  {{ post.text }}
+</div>
+<div id="nb-write-comment-container">
+  <div id="nb-comment-box-explain">
+    <h4> write comment </h3>
+  </div>
+  <div id="nb-write-comment-inner-box">
+    <div class="nb-profile-image-box">
+      <img src="{% static 'noticeboard/images/question.jpg' %}"/>
+    </div>
+    <form action="{% url 'comment.create' post.id %}" 
+      method="post" class="nb-comment-form">
+      {% csrf_token %}
+      <div id="nb-write-comment-register">
+        <button type="submit">submit</button>
+      </div>
+      <div id="nb-write-comment-box">
+        <input class="nb-comment-input" type="text" name="comment" value="">
+      </div>
+    </form>
+  </div>
+</div>
+<div id="nb-comment-wrap">
+  <div id="nb-count-comment">
+    Comments '{{ post.comment_set.count }}'
+  </div>
+</div>
+{% if comment %}
+{% for com in comment %}
+<div class="nb-board-comment-list">
+  <div class="nb-board-comment-box">
+    <div class="nb-profile-image-box nb-comment-writer-image">
+      <img src="{% static 'noticeboard/images/question.jpg' %}"/>
+    </div>
+    <div class="nb-comment-info">
+    {% if com.writer|stringformat:"s" == current_user  %}
+      <div class="nb-delmod-comment-box">
+        <div class="nb-delete-comment-box">
+          <a class="comment-delete" href="{% url 'comment.delete' com.id %}">
+            delete</a>
+        </div>
+        <div class="nb-modify-comment-box">
+          <a class="comment-modify">
+            modify</a>
+        </div>
+      </div>
+    {% else %}
+      <div class="delmod-comment-box">
+
+      </div>
+    {% endif %}
+      <div class="nb-comment-inner-date">
+        {{ com.pub_date }}
+      </div>
+      <div class="nb-comment-inner-info nb-comment-writer">
+        {{ com.writer }}
+      </div>
+      <div class="comment-text" class="nb-comment-inner-info">
+        <div class="comment-text-inner">
+          {{ com.text }}
+        </div>
+        <form class="comment-form" action="{% url 'comment.edit' com.id %}"
+          method="post">
+          {% csrf_token %}
+          <input type="text" name="comment" value="{{ com.text }}">
+          <button type="submit">confirm</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

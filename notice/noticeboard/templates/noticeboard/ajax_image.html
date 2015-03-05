@@ -1,0 +1,6 @@
+{% for image in images %}
+<div class="img-summary">
+  <img src="{{ image.imgfile.url }}" alt="{{ image.imgfile.url }}"
+       class="inner-img"/>
+</div>
+{% endfor %}

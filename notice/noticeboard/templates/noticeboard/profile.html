@@ -1,0 +1,95 @@
+{% extends "noticeboard/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'noticeboard/css/profile.css' %}" />
+{% endblock %}
+
+{% block mainbar %}
+<div class="subheader">
+  <div class="subheader-links">
+    <a class="profile-link" href="{% url 'profile.edit' profile.id %}">edit</a>
+    <a class="profile-link" href="{% url 'profile.delete' profile.id %}">delete</a>
+  </div>
+  <h1 id="user-displayname">
+    <a href="{% url 'profile.detail' profile.id %}">{{profile.user.username}}</a>
+  </h1>
+</div>
+<div class="user-info-container">
+  {% if profile.about_me %}
+  <div class="user-about-me">
+    <p>
+      {{ profile.about_me }}
+    </p>
+  </div>
+  {% else %}
+  <div class="user-about-me">
+    <p>(Your about me is currently blank)</p>
+    <p>
+      <a href="{% url 'profile.edit' profile.id %}">click here to edit</a>
+    </p>
+  </div>
+  {% endif %}
+  <div class="large-user-info">
+    <div class="user-header-left">
+      <div class="user-profile-img">
+        <a href="{% url 'profile.detail' profile.id %}">
+          {% if profile.profile_image %}
+          <div class="profile-img-wrapper">
+            <img src="{{ profile.profile_image.url }}" class="profile-image"/>
+          </div>
+          {% else %}
+          <div class="profile-img-wrapper">
+            <img class="profile-image" src="{% static 'noticeboard/images/question.jpg' %}"/>
+          </div>
+          {% endif %}
+        </a>
+      </div>
+      <div class="user-profile-data">
+        <table class="inner-user-profile">
+          <tbody>
+            <tr>
+              <th>bio</th>
+              <td>website</td>
+              <td>{{ profile.website }}</td>
+            </tr>
+            <tr>
+              <th></th>
+              <td>location</td>
+              <td>{{ profile.location }}</td>
+            </tr>
+            <tr>
+              <th></th>
+              <td>age</td>
+              {% if profile.age|add:0 == 0 %}
+              <td></td>
+              {% else %}
+              <td>{{ profile.age }}</td>
+              {% endif %}
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th>private</th>
+              <td>email</td>
+              <td>{{ profile.email }}</td>
+            </tr>
+            <tr>
+              <th></th>
+              <td>real name</td>
+              {% if profile.real_name|stringformat:"s" == '' %}
+              <td>{{ profile.user.username }}</td>
+              {% else %}
+              <td>{{ profile.real_name }}</td>
+              {% endif %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,197 @@
+#content-input{
+    width: 640px;
+    height: auto;
+    min-height: 150px;
+}
+
+#post-input-title{
+    color: black;
+    width: 594px;
+    height: 16px;
+    line-height: normal;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    text-align: start;
+    border: 1px solid #cccccc;
+    background-color: white;
+    padding: 8px 10px 8px 10px;
+}
+
+#post-title{
+    padding: 10px 0 15px 0;
+}
+
+.content-input{
+    display: block;
+    border: 1px solid #cccccc;
+    width: 640px;
+    height: auto;
+    min-height: 150px;
+}
+
+#form-submit{
+    padding: 10px 0 15px 0;
+}
+
+#submit-button{
+    color: #fff;
+    background-color: #009afd;
+    border: 1px solid #1777b7;
+    padding: 8px 10px 7px 10px;
+    font-family: 'Helvetica Neue',Helvetica, Arial, sans-serif;
+}
+
+#upload-file-box{
+    margin-top: 20px;
+}
+
+.inner-file-form{
+    width: 619px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+}
+
+label{
+    display: inline-block;
+    max-width: 100%;
+    font-weight: 700;
+    margin-bottom: 7px;
+    margin-top: 10px;
+}
+
+input[type=file]{
+    display: block;
+}
+
+.upload-file-inner{
+    display: none !important;
+}
+
+.upload-button{
+    display: inline-block;
+    cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+    background-color: #858d93;
+    padding: 7px;
+}
+
+#inner-file-name{
+    display: inline-block;
+}
+
+.file-label{
+    display: block;
+}
+
+.upload-file-outer{
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    width: 644px;
+}
+
+#image-upload{
+    padding: 5px 0 20px 0;
+}
+
+#inner-img-form{
+    display: none !important;
+}
+
+.img-upload-button{
+    display: inline-block;
+    cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+    background-color: #858d93;
+    padding: 7px;
+}
+
+#post-id{
+    display: none;
+}
+
+.image-submit{
+    display: none;
+}
+
+.post-image-inner{
+    max-width: 100%;
+    min-width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.content-inner-image{
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+}
+
+.img-summary{
+    width: 200px;
+    height: 200px;
+    display: inline-block;    
+}
+
+.inner-img{
+    max-width: 100%;
+    min-width: 100%;
+    vertical-align: middle;
+}
+
+.img-preview-button{
+    display: inline-block;
+    cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+    background-color: #858d93;
+    padding: 7px;
+}
+
+#preview-img-form{
+    display: none;
+
+}
+
+#dvPreview{
+    width: 700px;
+}
+
+.img-wrapper{
+    width : 215px;
+}
+
+.img-wrapper{
+    display: inline-block;
+}
+
+.post-image-area{
+    width: 800px;
+}
+
+.img-wrapper{
+    position: relative;
+}
+
+.del-button{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+}
+
+.del-button-src{
+    display: none;
+}
+
+.inner-del-button{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-image: url("/static/noticeboard/images/red-delete-button.jpg");
+    background-size: 30px 30px;
+    display: block;
+}

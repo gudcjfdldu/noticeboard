@@ -1,0 +1,142 @@
+{% extends "noticeboard/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'noticeboard/css/write.css' %}"/>
+  <script data-main="{% static 'noticeboard/js/write' %}" 
+          src="{% static 'noticeboard/libs/require.js' %}">
+  </script>
+
+{% endblock %}
+
+  {% block mainbar %}
+  {% if post %}
+    <form action="" enctype="multipart/form-data" method="post">
+      <div id="image-upload">
+        <div id=inner-image-upload">
+          <input type="button" class="img-upload-button" value="select image file"/>
+        </div>
+        <div id="inner-file-box">
+          <input type="file" name="file" id="inner-img-form"/>
+          <div id="post-id">{{ post.id }}</div>
+          <input type="submit" class="image-submit">
+        </div>
+      </div>
+    </form>
+    <form action="{% url 'post.edit' post.id %}" method="post"
+          enctype="multipart/form-data">
+      {% csrf_token %}
+      <div id="post-write-form">
+        <div id="post-title">
+          <label for="title">Title </label>
+          <input id="post-input-title" type="text" name="title"
+                 value="{{ post.title }} ">
+        </div>
+        <div id="post-editor">
+          <div class="post-content-container">
+            <div class="post-image-area">
+            {% for image in images %}
+              <div class="content-inner-image">
+                <img src="{{image.imgfile.url}}" class="post-image-inner"/>
+              </div>
+            {% endfor %}
+            </div> 
+            <div class="post-text-area">
+              <textarea class="content-input" name="content">{{ post.text }}</textarea>
+            </div>
+          </div>
+        </div>
+        <div id="upload-file-box">
+          {% for document in documents %}
+            <div id="uplaod-file-{{foorloop.counter}}" class="upload-file-outer">
+              <label for="inner-file-box{{forloop.counter}}" class="file-label">
+                file attachment {{forloop.counter}}
+              </label>
+              <input type="button" class="upload-button"
+                      value="select upload file"></button>
+              <div id="inner-file-name">
+                {{ document.filename }}
+              </div>
+              <input id="inner-file-box{{forloop.counter}}" class="upload-file-inner"
+                     type="file" name="file"/>
+            </div>
+          {% endfor %}
+        </div>
+        <div id="form-submit">
+          <input id="submit-button" type="submit" value="Post your board">
+        </div>
+      </div>
+    </form>
+    {% else %}
+    <form action="" enctype="multipart/form-data" method="post">
+      <div id="image-upload">
+        <div id=inner-image-upload">
+          <input type="button" class="img-preview-button" value="select image file"/>
+        </div>
+        <div id="inner-file-box">
+          <input type="file" name="file" id="preview-img-form"/>
+        </div>
+      </div>
+    </form>
+
+    <form action="{% url 'post.index_or_create' %}" method="post"
+          enctype="multipart/form-data">
+      {% csrf_token %}
+      <div id="post-write-form">
+        <div id="post-title">
+          <label for="title">Title </label>
+          <input id="post-input-title" type="text" name="title" value="">
+        </div>
+        {% if error_message %}
+        <div id="error-message">
+          <p>{{ error_message }}</p>
+        {% endif %}
+        </div>
+        <div class="del-button-src">
+          {% static 'noticeboard/images/red-delete-button.jpg' %}
+        </div>
+        <div id="post-editor">
+          <div class="post-content-continer">
+            <div id="dvPreview">
+            </div>
+            <textarea id="content-input" name="content"></textarea>
+          </div>
+        </div>
+        <div id="upload-file-box">
+          <div id="upload-file-1">
+            <label for="inner-file-box1">file attachment 1</label>
+            <input id="inner-file-box1" type="file" name="file"
+                   class="inner-file-form"/>
+          </div>
+          <div id="upload-file-2" style="display: none">
+            <label for="inner-file-box2">file attachment 2</label>
+            <input id="inner-file-box2" type="file" name="file"
+                   class="inner-file-form"/>
+          </div>
+          <div id="upload-file-3" style="display: none">
+            <label for="inner-file-box3">file attachment 3</label>
+            <input id="inner-file-box3" type="file" name="file"
+                   class="inner-file-form"/>
+          </div>
+          <div id="upload-file-4" style="display: none">
+            <label for="inner-file-box4">file attachment 4</label>
+            <input id="inner-file-box4" type="file" name="file"
+                   class="inner-file-form"/>
+          </div>
+          <div id="upload-file-5" style="display: none">
+            <label for="inner-file-box5">file attachment 5</label>
+            <input id="inner-file-box5" type="file" name="file"
+                   class="inner-file-form"/>
+          </div>
+        </div>
+        <div id="form-submit">
+          <input id="submit-button" type="submit" value="Post your board">
+          
+        </div>
+      </div>
+    </form>
+    {% endif %}
+  {% endblock %}
+

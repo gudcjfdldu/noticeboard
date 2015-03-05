@@ -1,0 +1,27 @@
+{% extends "noticeboard/default.html" %}
+{% load staticfiles %}
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'noticeboard/css/base.css' %}" />
+{% endblock %}
+{% block body %}
+  {{ block.super }}
+  {% include "noticeboard/include/topbar.html" %}
+  <div class="container">
+    {% include "noticeboard/include/header.html" %}
+    <div class="content">
+      <div id="mainbar">
+        {% block mainbar %}
+        {% endblock %}
+      </div>
+      <div id="sidebar">
+        {% block sidebar %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+  {% include "noticeboard/include/footer.html" %}
+{% endblock %}
+
+

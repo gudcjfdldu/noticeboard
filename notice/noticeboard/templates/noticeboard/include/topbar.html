@@ -1,0 +1,25 @@
+<div class="topbar">
+  <div class="topbar-wrapper">
+    <div class="topbar-links">
+      {% if current_user %}
+      <div class="user-profile">
+        <a href="{% url 'profile.detail' profile.id %}">show profile</a>
+      </div>
+      <div class="login-user">
+        <p> USERID: {{ current_user }} </p>
+      </div>
+      <form class="logout-user-form" action="{% url 'auth.logout' %}"
+            method="get">
+        <div class="logout-user">
+          <input id="logout-button" type="submit" value="logout">
+        </div>
+      </form>
+      {% endif %}
+      <form action="{% url 'post.index_or_create' %}" method="get"
+            class="search-post-form">
+        {% csrf_token %}
+        <input id="nb-search" type="text" name="title" value="">
+      </form>
+    </div>
+  </div>
+</div>

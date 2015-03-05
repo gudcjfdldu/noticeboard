@@ -1,0 +1,45 @@
+.subheader-links{
+    float: right;
+    padding-right: 380px;
+    padding-top: 20px;
+}
+
+#user-displayname{
+    display: inline-block;
+}
+
+.profile-link{
+    padding-left: 17px;
+}
+
+.subheader{
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.profile-img-wrapper{
+    width: 128px;
+    height: 128px;
+    float: left;
+}
+
+.profile-image{
+    width: 128px;
+    height: 128px;
+}
+
+.user-about-me{
+    width: 445px;
+    height: 225px;
+    float: right;
+    overflow-y: auto;
+    padding: 10px;
+    word-wrap: break-word;
+    font-size: 12px;
+    background-color: #f8f8f8;
+}
+
+.inner-user-profile{
+    border-spacing: 25px 10px;
+}
+
+

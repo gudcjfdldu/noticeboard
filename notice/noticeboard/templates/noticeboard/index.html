@@ -1,0 +1,65 @@
+{% extends "noticeboard/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'noticeboard/css/board.css' %}" />
+  <script data-main="{% static 'noticeboard/js/index' %}" 
+          src="{% static 'noticeboard/libs/require.js' %}">
+  </script>
+{% endblock %}
+
+  {% block mainbar %}
+      <div class="subheader">
+        <h1 id="Top posts">
+          Top posts
+        </h1>
+      </div>
+      <div id="plist-wrapper">
+        <div id="plist-mini-list">
+        {% for contact in contacts %}
+          <div class="post-summary">
+            <div class="post-num">
+              <div class="mini-num-counts">
+                {{ contact.id }}
+              </div>
+              <div>num</div>
+            </div>
+            <div class="post-comment">
+              <div class="mini-comment-counts">
+                {{ contact.comment_set.count }}
+              </div>
+              <div>comments</div>
+            </div>
+            <div class="post-view">
+              <div class="mini-view-counts">
+                {{ contact.hits }}
+              </div>
+              <div>view</div>
+            </div>
+            <div class="summary">
+              <h3>
+                <a class="post-hyperlink" href="{% url 'post.read' contact.id %}"
+                  title="{{ contact.text }}">
+                  {{ contact.title }}</a>
+              </h3>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="pagination">
+        <span class="step-links">
+          {% if contacts.has_previous %}
+          <a href="?page={{ contacts.previous_page_number }}">previous</a>
+          {% endif %}
+          <span class="current">
+            Page {{ contacts.number }} of {{contacts.paginator.num_pages }}.
+          </span>
+          {% if contacts.has_next %}
+          <a href="?page={{ contacts.next_page_number}}">next</a>
+          {% endif %}
+        </span>
+      </div>
+  {% endblock %}

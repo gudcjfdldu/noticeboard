@@ -1,0 +1,29 @@
+{% for contact in contacts %}
+<div class="post-summary">
+  <div class="post-num">
+    <div class="mini-num-counts">
+      {{ contact.id }}
+    </div>
+    <div>num</div>
+  </div>
+  <div class="post-comment">
+    <div class="mini-comment-counts">
+      {{ contact.comment_set.count }}
+    </div>
+    <div>comments</div>
+  </div>
+  <div class="post-view">
+    <div class="mini-view-counts">
+      {{ contact.hits }}
+    </div>
+    <div>view</div>
+  </div>
+  <div class="summary">
+    <h3>
+      <a class="post-hyperlink" href="{% url 'post.read' contact.id %}"
+        title="{{ contact.text }}">
+        {{ contact.title }}</a>
+    </h3>
+  </div>
+</div>
+{% endfor %}

@@ -1,0 +1,58 @@
+{% extends "noticeboard/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'noticeboard/css/register.css' %}" />
+{% endblock %}
+
+{% block mainbar %}
+  <div class="subheader">
+    <div id="tabs">
+      <a href="{% url 'auth.login' %}" title="Log in to CC-Hackers">
+        Log in</a>
+      <a href="{% url 'auth.register' %}" title="sign up to CC-Hackers">
+        Sign in</a>
+    </div>
+    <div>
+      <h2 class="title">Sign up page</h2>
+      <div id="login">
+        <form id="login-form" method="post"
+              action="{% url 'auth.register' %}">
+          {% csrf_token %}
+          <div class="login-input-container">
+            <div class="explain-signup">
+              <p> Sign up using register form </p>
+            </div>
+            <div class="login-user-name">
+              <input id="user-name" name="user-name"
+                     placeholder="Name (your public display name)" type="text">
+            </div>
+            <div class="login-user-email">
+              <input id="user-email" name="user-email"
+                     placeholder="Email (required, but never shown)" type="text">
+            </div>
+            <div class="login-user-password">
+              <input id="user-password" name="user-password"
+                     placeholder="Password" type="password">
+            </div>
+            <div class="confirm-user-password">
+              <input id="confirm-password" name="confirm-password"
+                     placeholder="Confirm password" type="password">
+            </div>
+            <div class="error-message">
+              {% if error_message %}
+              <p> {{ error_message }} </p>
+              {% endif %}
+            </div>
+            <div class="form-submit">
+              <input id="submit-button" name="submit-button" type="submit"
+                     value="Sign up">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
