@@ -1,0 +1,2 @@
+# noticeboard
+cc-hackers noticeboard
